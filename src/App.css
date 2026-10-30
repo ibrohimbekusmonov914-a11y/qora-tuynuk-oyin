@@ -1,0 +1,147 @@
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; min-height: 100%; }
+
+body {
+  display: block;
+  min-width: 320px;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at top, #1a0b3a 0%, #05010f 70%);
+  color: #fff;
+  font-family: "Courier New", monospace;
+  overflow-x: hidden;
+}
+
+/* ===== RGB RAMKA ===== */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  border: 6px solid;
+  border-image: linear-gradient(135deg, #ff0040, #ffe600, #00ff6a, #00d0ff, #a100ff, #ff0040) 1;
+  box-shadow: inset 0 0 30px rgba(255, 0, 80, 0.55);
+  animation: rgb-spin 4s linear infinite;
+}
+@keyframes rgb-spin {
+  from { filter: hue-rotate(0deg); }
+  to { filter: hue-rotate(360deg); }
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 22px 16px 28px;
+  text-align: center;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(30px, 6vw, 58px);
+  letter-spacing: 8px;
+  font-weight: 900;
+  background: linear-gradient(90deg, #ff0040, #ffe600, #00ff6a, #00d0ff, #a100ff, #ff0040);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: title-flow 5s linear infinite;
+}
+@keyframes title-flow {
+  from { background-position: 0% 0; }
+  to { background-position: 300% 0; }
+}
+
+.stage { position: relative; width: 100%; max-width: 900px; }
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #05010f;
+  border-radius: 14px;
+  touch-action: none;
+  box-shadow: 0 0 40px rgba(0, 208, 255, 0.25), 0 0 80px rgba(161, 0, 255, 0.2);
+}
+.canvas.playing { cursor: none; }
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 14px;
+  background: rgba(5, 1, 15, 0.84);
+  backdrop-filter: blur(4px);
+}
+
+.sub { margin: 0; font-size: clamp(14px, 2.4vw, 20px); color: #00d0ff; letter-spacing: 2px; }
+
+.help {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: clamp(12px, 2vw, 16px);
+  color: #cfd3ff;
+}
+
+.best { margin: 0; color: #ffe600; font-weight: bold; font-size: clamp(14px, 2.4vw, 20px); }
+
+.big { margin: 0; font-size: clamp(28px, 6vw, 52px); font-weight: 900; text-shadow: 0 0 20px #00d0ff; }
+
+.over {
+  margin: 0;
+  font-size: clamp(26px, 6vw, 50px);
+  color: #ff2d55;
+  text-shadow: 0 0 25px #ff2d55;
+  letter-spacing: 4px;
+}
+
+.btn {
+  font-family: inherit;
+  font-weight: 900;
+  font-size: clamp(16px, 2.6vw, 22px);
+  letter-spacing: 3px;
+  color: #fff;
+  background: linear-gradient(135deg, #a100ff, #00d0ff);
+  border: none;
+  border-radius: 12px;
+  padding: 14px 34px;
+  cursor: pointer;
+  box-shadow: 0 0 22px rgba(0, 208, 255, 0.6);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.btn:hover { transform: scale(1.07); box-shadow: 0 0 36px rgba(255, 0, 200, 0.8); }
+.btn:active { transform: scale(0.97); }
+
+/* Hand Tunnel uchun */
+.cam {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 150px;
+  border-radius: 10px;
+  border: 2px solid #00d0ff;
+  transform: scaleX(-1);
+  opacity: 0.85;
+  background: #000;
+}
+.cam.off { display: none; }
+
+.badge {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  padding: 6px 12px;
+  background: rgba(0, 0, 0, 0.65);
+  border-radius: 8px;
+  font-size: 13px;
+  color: #00ff6a;
+}
